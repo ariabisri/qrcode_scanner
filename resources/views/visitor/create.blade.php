@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <h1 class="mb-4">Tambah Pengunjung</h1>
+        <h1 class="mb-4">Add Participant</h1>
 
         <form action="{{ route('visitor.store') }}" method="POST">
             @csrf

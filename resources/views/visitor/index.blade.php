@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <h1>Daftar Pengunjung</h1>
+        <h1>Atendee List</h1>
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <a href="{{ route('visitor.create') }}" class="btn btn-primary mb-3">Tambah Pengunjung</a>
+        <a href="{{ route('visitor.create') }}" class="btn btn-primary mb-3">Add</a>
         <a href="{{ route('visitor.scan') }}" class="btn btn-success mb-3">Scan QR Code</a>
 
         <table class="table table-bordered">
@@ -32,7 +32,7 @@
                         <td>{{ $visitor->affiliation }}</td>
                         <td class="text-center">
                             <div>
-                                {!! QrCode::size(100)->generate(route('visitor.show', $visitor->id)) !!}
+                                {!! QrCode::size(100)->generate($visitor->qr_code) !!}
                                 <div class="mt-2">
                                     <a href="{{ route('visitor.downloadQrCode', $visitor->id) }}" class="btn btn-primary mt-2">Download QR Code</a>
                                 </div>

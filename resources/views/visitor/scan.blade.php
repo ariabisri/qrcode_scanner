@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html> --}}
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -45,7 +45,7 @@
                     <th>Room</th>
                 </tr>
             </thead>
-            <tbody id="tabel-visitor">
+            <tbody id="visitor-info">
                 @foreach($checkInTimes as $checkIn)
                     <tr>
                         <td>{{ $checkIn->visitor->id_conference }}</td>
@@ -63,7 +63,13 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        Swal.fire({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success"
+});
         var scanning = false; // Flag untuk mencegah scan berulang
 
         function onScanSuccess(decodedText, decodedResult) {
@@ -98,7 +104,7 @@
             .then(data => {
                 console.log('Response data:', data);
                 if (data.success) {
-                    document.getElementById('visitor-info').insertAdjacentHTML('beforeend', `
+                    document.querySelector('#visitor-info').insertAdjacentHTML('beforeend', `
                         <tr>
                             <td>${data.visitor.id_conference}</td>
                             <td>${data.visitor.name}</td>
@@ -108,14 +114,16 @@
                             <td>Ruangan ${data.visitor.room}</td>
                         </tr>
                     `);
+                   
 
                     Swal.fire({
-                        title: Welcome Mr./Mrs. ${data.visitor.name},
-                        text: You have successfully checked in to Room ${data.visitor.room}.,
+                        title: `Welcome Mr./Mrs ${data.visitor.name}`,
+                        text: 'You have successfully checked in to Room',
                         icon: 'success',
                         timer: 2500, // Set timer to 2.5 seconds (2500 ms)
                         showConfirmButton: false // Tidak menampilkan tombol OK
                     });
+                    
                 } else {
                     alert('Check-in failed: ' + data.message);
                 }
@@ -127,7 +135,7 @@
             })
             .catch(err => {
                 console.error('Error:', err);
-                alert('An error occurred. Please try again.');
+                // alert('An error occurred. Please try again.');
 
                 // Tetap izinkan scan lagi setelah error, setelah 3 detik
                 setTimeout(() => {

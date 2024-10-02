@@ -23,6 +23,9 @@ Route::get('/visitor/undangan/{id}', [VisitorController::class, 'invitation'])->
 Route::get('/visitor/scan', [VisitorController::class, 'showScanPage'])->name('visitor.scan');
 Route::post('/check-in', [VisitorController::class, 'checkIn']);
 
+// session
+Route::get('session/{name}', [VisitorController::class, 'session'])->name('session');
+
 Route::get('visitor/{id}/download-qr-code', [VisitorController::class, 'downloadQrCode'])->name('visitor.downloadQrCode');
 Route::get('/scan', [VisitorController::class, 'showScanPage'])->name('visitor.scan');
 
